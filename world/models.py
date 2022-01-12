@@ -18,3 +18,21 @@ class WorldBorder(models.Model):
     def __str__(self):
         return self.name
 
+
+from django.contrib.gis.db import models
+
+
+class DpawRegion(models.Model):
+    feat_id = models.CharField(max_length=64)
+    region = models.CharField(max_length=64)
+    ogc_fid = models.IntegerField(null=True, blank=True)
+    office = models.CharField(max_length=64, null=True, blank=True)
+    hectares = models.FloatField(null=True, blank=True)
+    md5_rowhash = models.CharField(max_length=64, null=True, blank=True)
+
+    geom = models.MultiPolygonField(srid=4283)
+
+    def __str__(self):
+        return self.region
+
+
